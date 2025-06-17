@@ -13,10 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  role Role @default(READER)
+  dob DateTime
+}
+
 model Article {
   id Int @id @default(autoincrement())
   title String
   content String
   author String
   published Boolean
+}
+
+enum Role {
+  READER
+  WRITER
+  EDITOR
+  ADMIN
 }
