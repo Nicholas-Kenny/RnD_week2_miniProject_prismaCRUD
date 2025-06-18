@@ -1,7 +1,7 @@
 const prismaClient = require("@prisma/client");
 
 const prisma = new prismaClient.PrismaClient({
-  log: ["errors", "query"],
+  log: ["error", "query"],
 });
 
 module.exports = prisma;

@@ -1,5 +1,5 @@
 const db = require("../../../helpers/db");
-const { hash, compare } = require("../helpers/hash");
+const { hash, compare } = require("../../../helpers/hash");
 
 const user = async (email) => {
   return await db.user.findFirst({
