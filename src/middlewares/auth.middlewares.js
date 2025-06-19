@@ -12,8 +12,9 @@ const accessValidation = (req, res, next) => {
   const token = authorization.split(" ")[1];
 
   try {
-    const jwtDecode = jwt.verify(token);
+    const jwtDecode = verify(token);
     req.userData = jwtDecode;
+    next();
   } catch (error) {
     return res.status(401).json({
       message: "Unathorized",
@@ -24,7 +25,7 @@ const accessValidation = (req, res, next) => {
 
 const authorization = (...assignedRoles) => {
   return (req, res, next) => {
-    if (!req.user || !assignedRoles) {
+    if (!assignedRoles.includes(req.userData.role)) {
       return res.status(401).json({
         message: "Akses ditolak",
       });

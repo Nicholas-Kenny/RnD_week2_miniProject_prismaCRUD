@@ -12,7 +12,7 @@ async function main() {
         email: "tripi.tropi@gagak.com",
         password: hashedPassword,
         role: "ADMIN",
-        dob: new Date("10 Januari 2000"),
+        dob: new Date("2000-01-10"),
       },
     });
 

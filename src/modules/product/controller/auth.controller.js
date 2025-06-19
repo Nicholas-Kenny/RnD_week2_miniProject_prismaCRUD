@@ -28,7 +28,23 @@ const login = async (req, res) => {
   }
 };
 
+const adminRoleAssignment = async (req, res) => {
+  try {
+    const { email, role } = req.body;
+    const update = await authService.adminRoleAssignment({ email, role });
+
+    return res.status(200).json({
+      message: `${email} Role Updated : ${role}`,
+      data: update,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ error: "assign role failed" });
+  }
+};
+
 module.exports = {
   register,
   login,
+  adminRoleAssignment,
 };

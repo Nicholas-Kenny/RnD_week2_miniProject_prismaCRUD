@@ -1,5 +1,5 @@
 const db = require("../../../helpers/db");
-const {hash, compare} = require("../../../helpers/hash");
+const { hash, compare } = require("../../../helpers/hash");
 
 const user = async (email) => {
   return await db.user.findFirst({
@@ -22,7 +22,19 @@ const newUser = async (name, email, password, dob) => {
   });
 };
 
+const adminRoleAssignment = async (email, role) => {
+  return await db.user.update({
+    where: {
+      email,
+    },
+    data: {
+      role,
+    },
+  });
+};
+
 module.exports = {
   user,
   newUser,
+  adminRoleAssignment,
 };

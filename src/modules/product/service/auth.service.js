@@ -1,8 +1,6 @@
 const authRepository = require("../repository/auth.repository");
 const bcrypt = require("bcrypt");
-const {applyToken} = require("../../../helpers/jwt");
-
-
+const { applyToken } = require("../../../helpers/jwt");
 
 const register = async ({ name, email, password, dob }) => {
   const user = await authRepository.user(email);
@@ -33,13 +31,28 @@ const login = async ({ email, password }) => {
     email: user.email,
     password: user.password,
     dob: user.dob,
-    role: user.role
+    role: user.role,
   });
 
-  return {token, user};
+  return { token, user };
+};
+
+const adminRoleAssignment = async ({ email, role }) => {
+  const user = await authRepository.user(email);
+  if (!user) {
+    throw new Error("User Not Found");
+  }
+
+  const availableRoles = ["WRITER", "READER", "EDITOR", "ADMIN"];
+  if (!availableRoles.includes(role)) {
+    throw new Error("Role Invalid");
+  }
+
+  return await authRepository.adminRoleAssignment(email, role);
 };
 
 module.exports = {
   register,
   login,
+  adminRoleAssignment,
 };
