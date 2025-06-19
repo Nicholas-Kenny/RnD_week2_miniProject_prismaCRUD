@@ -2,6 +2,8 @@ const authRepository = require("../repository/auth.repository");
 const bcrypt = require("bcrypt");
 const {applyToken} = require("../../../helpers/jwt");
 
+
+
 const register = async ({ name, email, password, dob }) => {
   const user = await authRepository.user(email);
   if (user) {
