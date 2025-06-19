@@ -3,10 +3,10 @@ const jwt = require("jsonwebtoken");
 
 
 
-const token  = (payload) => {
+const applyToken  = (payload) => {
     return jwt.sign(payload, process.env.JWT_SECRET);
 }
 
 module.exports = {
-    token
+    applyToken
 }

@@ -17,12 +17,11 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
 
-    const {user, token} = await authService.login({ email, password });
-  
-    return res.status(200).json(user);
-    
+    const { user, token } = await authService.login({ email, password });
+
+    return res.status(200).json({ token, user });
   } catch (error) {
     console.log(error);
     return res.json({ error: "internal Server Error" });

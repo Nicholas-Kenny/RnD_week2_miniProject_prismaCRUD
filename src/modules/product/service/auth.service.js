@@ -1,6 +1,6 @@
 const authRepository = require("../repository/auth.repository");
-const bycrypt = require("bcrypt");
-const token = require("../../../helpers/jwt");
+const bcrypt = require("bcrypt");
+const {applyToken} = require("../../../helpers/jwt");
 
 const register = async ({ name, email, password, dob }) => {
   const user = await authRepository.user(email);
@@ -25,7 +25,7 @@ const login = async ({ email, password }) => {
     throw new Error("Invalid Credentials");
   }
 
-  const token = token({
+  const token = applyToken({
     id: user.id,
     name: user.name,
     email: user.email,
