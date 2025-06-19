@@ -20,7 +20,7 @@ const accessValidation = (req, res, next) => {
       message: "Unathorized",
     });
   }
-  next();
+//   next();
 };
 
 const authorization = (...assignedRoles) => {
